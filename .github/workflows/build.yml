@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build: [linux, windows]
+        build: [linux, windows, mac-intel, mac-arm]
         include:
         - build: linux
           os: ubuntu-latest
@@ -19,6 +19,16 @@ jobs:
           rust: nightly-x86_64-msvc
           target: x86_64-pc-windows-msvc
           archive-name: NodeInject-windows.7z
+        - build: mac-intel
+          os: macos-latest
+          rust: nightly
+          target: x86_64-apple-darwin
+          archive-name: NodeInject-mac-intel.tar.gz
+        - build: mac-arm
+          os: macos-latest
+          rust: nightly
+          target: aarch64-apple-darwin
+          archive-name: NodeInject-mac-arm.tar.gz
       fail-fast: false
 
     steps:
